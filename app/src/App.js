@@ -6,15 +6,57 @@ class App extends Component {
   state = {
     guests: [
       {
-        name: 'Treasure',
-        isConfirmed: false
+        name: 'Sarah',
+        isConfirmed: false,
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-44.jpg'
+
       },
       {
         name: 'Nick',
-        isConfirmed: true
+        isConfirmed: true,
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-14.jpg'
+
+      },
+      {
+        name: 'Jessica',
+        isConfirmed: false,
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-4.jpg'
+
+      },
+      {
+        name: 'James',
+        isConfirmed: true,
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-2.jpg'
+
+      },
+      {
+        name: 'Megan',
+        isConfirmed: false,
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-2.jpg'
+
+      },
+      {
+        name: 'Sam',
+        isConfirmed: true,
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-1.jpg'
+
       }
     ]
   }
+
+  toggleConfirmationAt = indexToChange =>
+    this.setState({
+      guests: this.state.guests.map((guest, index) => {
+        if (index === indexToChange){
+          return{
+            ...guest,
+            isConfirmed: !guest.isConfirmed
+          };
+        }
+        return guest
+      })
+    });
+
 
   // Total guests
   // getTotalInvited = {} => this.state.guests.length;
@@ -57,8 +99,9 @@ class App extends Component {
               </tr>
             </tbody>
           </table>
-
-          <GuestList guests={this.state.guests}/>
+          <div className="row">
+            <GuestList guests={this.state.guests}/>
+          </div>
 
 
 
