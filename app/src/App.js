@@ -4,7 +4,7 @@ import  GuestList from './GuestList';
 
 class App extends Component {
   state = {
-    guest: [
+    guests: [
       {
         name: 'Treasure',
         isConfirmed: false
