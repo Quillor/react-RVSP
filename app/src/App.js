@@ -100,7 +100,10 @@ class App extends Component {
             </tbody>
           </table>
           <div className="row">
-            <GuestList guests={this.state.guests}/>
+            <GuestList
+              guests={this.state.guests}
+              toggleConfirmationAt={this.toggleConfirmationAt}
+              />
           </div>
 
 

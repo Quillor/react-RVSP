@@ -12,7 +12,11 @@ const Guest = props =>
         <div className="col-8">
           <h3>{props.name}</h3>
           <div className="my-3">
-            <input type="checkbox" checked={props.isConfirmed} /> Confirmed
+            <input
+              type="checkbox"
+              checked={props.isConfirmed}
+              onChange={props.handleConfirmation}
+              /> Confirmed
           </div>
           <div className="d-flex flew-row w-100 justify-content-between">
             <button className='btn btn-sm btn-primary'>edit</button>
@@ -30,6 +34,7 @@ Guest.proptypes = {
   name: PropTypes.string.isRequired,
   isConfirmed: PropTypes.bool.isRequired,
   avatarURL: PropTypes.string.isRequired,
+  handleConfirmation: PropTypes.func.isRequired
 };
 
 export default Guest;

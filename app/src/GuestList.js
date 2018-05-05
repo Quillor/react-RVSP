@@ -11,13 +11,15 @@ const GuestList = props =>
         name={guest.name}
         isConfirmed={guest.isConfirmed}
         avatarURL={guest.avatarURL}
+        handleConfirmation={() => props.toggleConfirmationAt(index)}
         />
 
   )}
 </div>;
 
 GuestList.proptypes = {
-  guests: PropTypes.array.isRequired
+  guests: PropTypes.array.isRequired,
+  toggleConfirmationAt: PropTypes.func.isRequired
 }
 
 export default GuestList;
