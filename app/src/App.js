@@ -8,58 +8,71 @@ class App extends Component {
       {
         name: 'Sarah',
         isConfirmed: false,
-        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-44.jpg'
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-44.jpg',
+        isEditing: true,
 
       },
       {
         name: 'Nick',
         isConfirmed: true,
-        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-14.jpg'
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-14.jpg',
+        isEditing: false,
 
       },
       {
         name: 'Jessica',
         isConfirmed: false,
-        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-4.jpg'
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-4.jpg',
+        isEditing: false,
 
       },
       {
         name: 'James',
         isConfirmed: true,
-        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-2.jpg'
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-2.jpg',
+        isEditing: false,
 
       },
       {
         name: 'Megan',
         isConfirmed: false,
-        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-2.jpg'
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-2.jpg',
+        isEditing: false,
 
       },
       {
         name: 'Sam',
         isConfirmed: true,
-        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-1.jpg'
+        avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-1.jpg',
+        isEditing: false,
 
       }
     ]
   }
 
-  toggleConfirmationAt = indexToChange =>
+  toggleGuestPropertyAt = (property, indexToChange) =>
     this.setState({
       guests: this.state.guests.map((guest, index) => {
         if (index === indexToChange){
           return{
             ...guest,
-            isConfirmed: !guest.isConfirmed
+            [property]: !guest[property]
           };
         }
         return guest
       })
     });
 
+    toggleConfirmationAt = index =>
+      this.toggleGuestPropertyAt("isConfirmed", index);
+
+    toggleEditingAt = index =>
+      this.toggleGuestPropertyAt("isEditing", index);
+
+
 
   // Total guests
-  // getTotalInvited = {} => this.state.guests.length;
+  getTotalInvited = () => this.state.guests.length;
   // Get Attending Guest
 
   // Get how many are not coming
@@ -103,6 +116,7 @@ class App extends Component {
             <GuestList
               guests={this.state.guests}
               toggleConfirmationAt={this.toggleConfirmationAt}
+              toggleEditingAt={this.toggleEditingAt}
               />
           </div>
 

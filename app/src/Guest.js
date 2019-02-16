@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import GuestName from './GuestName';
 
 const Guest = props =>
 <div className="col-md-6">
@@ -10,7 +10,10 @@ const Guest = props =>
           <img src={props.avatarURL} className="w-100 border border-dark rounded-circle" alt={props.name} />
         </div>
         <div className="col-8">
-          <h3>{props.name}</h3>
+          <GuestName
+            isEditing={props.isEditing}>
+            {props.name}
+          </GuestName>
           <div className="my-3">
             <input
               type="checkbox"
@@ -19,7 +22,7 @@ const Guest = props =>
               /> Confirmed
           </div>
           <div className="d-flex flew-row w-100 justify-content-between">
-            <button className='btn btn-sm btn-primary'>edit</button>
+            <button onClick={props.handleToggleEditing} className='btn btn-sm btn-primary'>edit</button>
             <button className='btn btn-sm btn-outline-danger'>remove</button>
           </div>
         </div>
@@ -33,8 +36,10 @@ const Guest = props =>
 Guest.proptypes = {
   name: PropTypes.string.isRequired,
   isConfirmed: PropTypes.bool.isRequired,
+  isEditing: PropTypes.bool.isRequired,
   avatarURL: PropTypes.string.isRequired,
-  handleConfirmation: PropTypes.func.isRequired
+  handleConfirmation: PropTypes.func.isRequired,
+  handleToggleEditing: PropTypes.func.isRequired
 };
 
 export default Guest;
