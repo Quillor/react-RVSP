@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import './App.css';
 import  GuestList from './GuestList';
 
+
 class App extends Component {
   state = {
     isFiltered: false,
+    pendingGuest: "",
     guests: [
       {
         name: 'Sarah',
         isConfirmed: false,
         avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-44.jpg',
-        isEditing: true,
+        isEditing: false,
 
       },
       {
@@ -46,7 +48,6 @@ class App extends Component {
         isConfirmed: true,
         avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-1.jpg',
         isEditing: false,
-
       }
     ]
   }
@@ -85,9 +86,36 @@ class App extends Component {
       })
     });
 
+  // addNewGuest = (guestName, indexToChange) =>
+
+
+  onDrop = (acceptedFiles, rejectedFiles) => {
+    // Do something with files
+  }
+
 
   toggleFilter = () =>
     this.setState({isFiltered: !this.state.isFiltered});
+
+  handleNameInput = e =>
+      this.setState({ pendingGuest: e.target.value});
+
+  newGuestSubmitHandler = e =>{
+    e.preventDefault(
+      this.setState({
+        guests: [
+          {
+            name: this.state.pendingGuest,
+            isConfirmed: false,
+            avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-2.jpg',
+            isEditing: false,
+          },
+          ...this.state.guests
+        ],
+        pendingGuest: ''
+      })
+    );
+  }
   getTotalInvited = () => this.state.guests.length;
   // Get Attending Guest
 
@@ -100,9 +128,18 @@ class App extends Component {
         <header>
           <h1>RSVP</h1>
           <p>A Treehouse App</p>
-          <form>
-              <input type="text" value="Safia" placeholder="Invite Someone"/>
-              <button type="submit" name="submit" value="submit" onSubmit={""}>Submit</button>
+          <form onSubmit={this.newGuestSubmitHandler}>
+              <input
+                type="text"
+                value="Safia"
+                onChange={this.handleNameInput}
+                value={this.state.pendingGuest}
+                placeholder="Invite Someone"/>
+              <button
+                type="submit"
+                name="submit"
+                value="submit"
+                onSubmit={""}>Submit</button>
           </form>
         </header>
         <div className="main">
