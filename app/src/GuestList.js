@@ -6,7 +6,6 @@ const GuestList = props =>
 <div className="row">
   {props.guests
     .filter(guest => !props.isFiltered || guest.isConfirmed )
-    .reverse()
     .map((guest, index) =>
       <Guest
         key={index}
@@ -20,6 +19,7 @@ const GuestList = props =>
         handleConfirmation={() => props.toggleConfirmationAt(index)}
         handleToggleEditing={() => props.toggleEditingAt(index)}
         setName={text => props.setNameAt(text, index)}
+        handleRemove={() => props.removeGuestAt(index)}
         />
 
   )}
@@ -32,6 +32,7 @@ GuestList.proptypes = {
   setNameAt: PropTypes.func.isRequired,
   isFiltered: PropTypes.bool.isRequired,
   guestNumber: PropTypes.string.isRequired,
+  removeGuestAt: PropTypes.func.isRequired,
 
 }
 

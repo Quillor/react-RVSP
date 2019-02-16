@@ -68,6 +68,13 @@ class App extends Component {
   toggleConfirmationAt = index =>
     this.toggleGuestPropertyAt("isConfirmed", index);
 
+  removeGuestAt = index =>
+    this.setState({
+      guests: [
+        ...this.state.guests.slice(0, index),
+        ...this.state.guests.slice(index + 1)
+      ]
+    });
 
   toggleEditingAt = index =>
     this.toggleGuestPropertyAt("isEditing", index);
@@ -98,14 +105,14 @@ class App extends Component {
       e.preventDefault(
         this.setState({
           guests: [
-            ...this.state.guests,
             {
               name: this.state.pendingGuest,
               isConfirmed: false,
               avatarURL: `https://d3iw72m71ie81c.cloudfront.net/male-${Math.floor(Math.random() * Math.floor(50))}.jpg`,
               // avatarURL: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',
               isEditing: false,
-            }
+            },
+            ...this.state.guests
 
           ],
           pendingGuest: ''
@@ -180,6 +187,7 @@ class App extends Component {
               toggleEditingAt={this.toggleEditingAt}
               isFiltered={this.state.isFiltered}
               setNameAt={this.setNameAt}
+              removeGuestAt={this.removeGuestAt}
               />
           </div>
 

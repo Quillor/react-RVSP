@@ -32,11 +32,18 @@ const Guest = (props)  =>
 
                {props.isEditing ? 'save' : 'edit'}
             </button>
-            <button className='btn btn-sm btn-outline-danger'>remove</button>
+            <button onClick={props.handleRemove} className='btn btn-sm btn-outline-danger'>remove</button>
+          </div>
+          <div className="row">
+            <div className="col">
+              <small>Guest Number: {props.guestNumber}</small>
+            </div>
           </div>
         </div>
+
     </div>
   </div>
+
 </div>
   ;
 
@@ -49,7 +56,8 @@ Guest.proptypes = {
   avatarURL: PropTypes.string.isRequired,
   handleConfirmation: PropTypes.func.isRequired,
   handleToggleEditing: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired
+  setName: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired
 };
 
 export default Guest;
