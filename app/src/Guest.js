@@ -5,45 +5,46 @@ import GuestName from './GuestName';
 
 
 const Guest = (props)  =>
-<div className="col-md-6 Guest-Fade" id="Guest" >
-  <div className="card p-3 my-3">
-    <div className="row">
-        <div className="col-4">
-          <img src={props.avatarURL} className="w-100 border border-dark rounded-circle" alt={props.name} />
-        </div>
-        <div className="col-8">
+<div className="col-md-12 d-block Guest-Fade" id="Guest" >
+  <div className="card p-1 my-1">
+    <div className="row p-4">
+        <div className="col-8 d-flex flex-direction-row align-items-center">
+          <h3 className="d-block">{props.guestNumber}</h3>
+          <input
+            type="checkbox"
+            checked={props.isCompleted}
+            onChange={props.handleConfirmation}
+            />
           <GuestName
             isEditing={props.isEditing}
             handChangeEdits={e => props.setName(e.target.value)}
             >
             {props.name}
+
           </GuestName>
-          <div className="my-3">
-            <input
-              type="checkbox"
-              checked={props.isConfirmed}
-              onChange={props.handleConfirmation}
-              /> Confirmed
-          </div>
-          <div className="d-flex flew-row w-100 justify-content-between">
+
+        </div>
+        <div className="col-4">
+          <div className="d-flex flex-direction-row align-items-center">
+            <button onClick={props.handleRemove}
+              className='btn btn-sm m-1  btn-block btn-outline-danger'>remove</button>
             <button
               onClick={props.handleToggleEditing}
-              className={props.isEditing ? 'btn btn-sm btn-success' : 'btn btn-sm btn-primary'}>
-
+              className={props.isEditing ? 'btn btn-sm m-1  btn-block btn-success' : 'btn btn-sm m-1  btn-block btn-primary'}>
                {props.isEditing ? 'save' : 'edit'}
             </button>
-            <button onClick={props.handleRemove} className='btn btn-sm btn-outline-danger'>remove</button>
-          </div>
-          <div className="row">
-            <div className="col">
-              <small>Guest Number: {props.guestNumber}</small>
-            </div>
+
           </div>
         </div>
 
+          <div className="row">
+            <div className="col">
+
+            </div>
+          </div>
+
     </div>
   </div>
-
 </div>
   ;
 
@@ -51,7 +52,7 @@ const Guest = (props)  =>
 
 Guest.proptypes = {
   name: PropTypes.string.isRequired,
-  isConfirmed: PropTypes.bool.isRequired,
+  isCompleted: PropTypes.bool.isRequired,
   isEditing: PropTypes.bool.isRequired,
   avatarURL: PropTypes.string.isRequired,
   handleConfirmation: PropTypes.func.isRequired,

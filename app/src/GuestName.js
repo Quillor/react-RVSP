@@ -6,7 +6,7 @@ const GuestName = props => {
       return (
         <input
           type="text"
-          className="form-control"
+          className="form-control h2"
           value={props.children}
           onChange={props.handChangeEdits}
         />
@@ -14,7 +14,7 @@ const GuestName = props => {
     }
 
     return (
-      <span class="p-2">{props.children}</span>
+      <span class="p-2 form-control">{props.children}</span>
     );
 };
 

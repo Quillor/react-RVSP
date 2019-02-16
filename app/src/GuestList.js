@@ -5,7 +5,7 @@ import Guest from './Guest';
 const GuestList = props =>
 <div className="row">
   {props.guests
-    .filter(guest => !props.isFiltered || guest.isConfirmed )
+    .filter(guest => !props.isFiltered || !guest.isCompleted )
     .map((guest, index) =>
       <Guest
         key={index}
@@ -13,7 +13,7 @@ const GuestList = props =>
         totalGuestNumber={props.totalGuestNumber}
         guestNumber={index + 1}
         lastGuest={index === 0}
-        isConfirmed={guest.isConfirmed}
+        isCompleted={guest.isCompleted}
         isEditing={guest.isEditing}
         avatarURL={guest.avatarURL}
         handleConfirmation={() => props.toggleConfirmationAt(index)}

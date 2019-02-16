@@ -5,52 +5,62 @@ import  GuestList from './GuestList';
 
 class App extends Component {
   state = {
-    isFiltered: false,
+
+    isFiltered: true,
     pendingGuest: "",
     guests: [
       {
-        name: 'Sarah',
-        isConfirmed: false,
+        name: 'Get the Milk',
+        isCompleted: false,
         avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-44.jpg',
         isEditing: false,
-
+        id: 1,
       },
       {
         name: 'Nick',
-        isConfirmed: true,
+        isCompleted: true,
         avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-14.jpg',
         isEditing: false,
-
+        id: 2,
       },
       {
         name: 'Jessica',
-        isConfirmed: false,
+        isCompleted: false,
         avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-4.jpg',
         isEditing: false,
-
+        id: 3,
       },
       {
         name: 'James',
-        isConfirmed: true,
+        isCompleted: true,
         avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-2.jpg',
         isEditing: false,
-
+        id: 4,
       },
       {
         name: 'Megan',
-        isConfirmed: false,
+        isCompleted: false,
         avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/female-2.jpg',
         isEditing: false,
-
+        id: 5,
       },
       {
         name: 'Sam',
-        isConfirmed: true,
+        isCompleted: true,
         avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-1.jpg',
         isEditing: false,
+        id: 6,
       }
-    ]
+    ],
+    displayLength: 6,
   }
+
+  checkDisplayLength = () =>
+    this.setState({
+      displayLength: this.state.guest.filter(
+      ).length
+    }
+  );
 
   toggleGuestPropertyAt = (property, indexToChange) =>
     this.setState({
@@ -66,7 +76,7 @@ class App extends Component {
     });
 
   toggleConfirmationAt = index =>
-    this.toggleGuestPropertyAt("isConfirmed", index);
+    this.toggleGuestPropertyAt("isCompleted", index);
 
   removeGuestAt = index =>
     this.setState({
@@ -107,7 +117,7 @@ class App extends Component {
           guests: [
             {
               name: this.state.pendingGuest,
-              isConfirmed: false,
+              isCompleted: false,
               avatarURL: `https://d3iw72m71ie81c.cloudfront.net/male-${Math.floor(Math.random() * Math.floor(50))}.jpg`,
               // avatarURL: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',
               isEditing: false,
@@ -132,16 +142,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {this.checkDisplayLength}
+        {console.log(`${this.state.displayLength}`)}
         <header>
-          <h1>RSVP</h1>
-          <p>A Treehouse App</p>
+          <h1>To Do</h1>
           <form onSubmit={this.newGuestSubmitHandler}>
               <input
                 type="text"
                 value=""
                 onChange={this.handleNameInput}
                 value={this.state.pendingGuest}
-                placeholder="Invite Someone"/>
+                placeholder="New Task"/>
               <button
                 type="submit"
                 name="submit"
@@ -149,32 +160,31 @@ class App extends Component {
                 className="btn btn-primary"
                 disabled={this.state.pendingGuest.trim().length < 1}
 
-                >Invite</button>
+                >Add</button>
           </form>
         </header>
         <div className="main">
           <div>
-            <h2>Invitees</h2>
             <label>
               <input
                 type="checkbox"
                 onChange={this.toggleFilter}
                 check={this.state.isFiltered}
-                /> Hide those who havent responded
+                /> Show Completed Tasks
             </label>
           </div>
           <table className="counter">
             <tbody>
               <tr>
-                <td>Attending:</td>
-                <td>{this.state.guests.filter(guest => guest.isConfirmed).length}</td>
+                <td>Completed:</td>
+                <td>{this.state.guests.filter(guest => guest.isCompleted).length}</td>
               </tr>
               <tr>
-                <td>Unconfirmed:</td>
-                <td>{this.state.guests.filter(guest => !guest.isConfirmed).length}</td>
+                <td>In Complete:</td>
+                <td>{this.state.guests.filter(guest => !guest.isCompleted).length}</td>
               </tr>
               <tr>
-                <td>Total:</td>
+                <td>Tasks:</td>
                 <td>{this.state.guests.length}</td>
               </tr>
             </tbody>
