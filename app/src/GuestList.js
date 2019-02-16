@@ -6,10 +6,14 @@ const GuestList = props =>
 <div className="row">
   {props.guests
     .filter(guest => !props.isFiltered || guest.isConfirmed )
+    .reverse()
     .map((guest, index) =>
       <Guest
         key={index}
         name={guest.name}
+        totalGuestNumber={props.totalGuestNumber}
+        guestNumber={index + 1}
+        lastGuest={index === 0}
         isConfirmed={guest.isConfirmed}
         isEditing={guest.isEditing}
         avatarURL={guest.avatarURL}
@@ -27,6 +31,7 @@ GuestList.proptypes = {
   toggleEditingAt: PropTypes.func.isRequired,
   setNameAt: PropTypes.func.isRequired,
   isFiltered: PropTypes.bool.isRequired,
+  guestNumber: PropTypes.string.isRequired,
 
 }
 

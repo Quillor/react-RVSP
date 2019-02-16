@@ -1,9 +1,29 @@
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css";
 
-/* =================================
-  Element Styles
-==================================== */
 
+
+
+
+/* TODO: Move this into .SCSS componets */
+
+/* .Guest-Fade{
+  animation-name: example;
+  animation-duration: 4s;
+}
+
+@keyframes example {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+} */
+
+
+
+
+/*  Boiler plate  */
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

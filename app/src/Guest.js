@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GuestName from './GuestName';
 
-const Guest = props =>
-<div className="col-md-6">
+
+
+const Guest = (props)  =>
+<div className="col-md-6 Guest-Fade" id="Guest" >
   <div className="card p-3 my-3">
     <div className="row">
         <div className="col-4">

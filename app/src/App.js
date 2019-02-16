@@ -68,6 +68,7 @@ class App extends Component {
   toggleConfirmationAt = index =>
     this.toggleGuestPropertyAt("isConfirmed", index);
 
+
   toggleEditingAt = index =>
     this.toggleGuestPropertyAt("isEditing", index);
 
@@ -86,14 +87,6 @@ class App extends Component {
       })
     });
 
-  // addNewGuest = (guestName, indexToChange) =>
-
-
-  onDrop = (acceptedFiles, rejectedFiles) => {
-    // Do something with files
-  }
-
-
   toggleFilter = () =>
     this.setState({isFiltered: !this.state.isFiltered});
 
@@ -101,20 +94,27 @@ class App extends Component {
       this.setState({ pendingGuest: e.target.value});
 
   newGuestSubmitHandler = e =>{
-    e.preventDefault(
-      this.setState({
-        guests: [
-          {
-            name: this.state.pendingGuest,
-            isConfirmed: false,
-            avatarURL: 'https://d3iw72m71ie81c.cloudfront.net/male-2.jpg',
-            isEditing: false,
-          },
-          ...this.state.guests
-        ],
-        pendingGuest: ''
-      })
-    );
+    if (this.state.pendingGuest.trim().length >= 1) {
+      e.preventDefault(
+        this.setState({
+          guests: [
+            ...this.state.guests,
+            {
+              name: this.state.pendingGuest,
+              isConfirmed: false,
+              avatarURL: `https://d3iw72m71ie81c.cloudfront.net/male-${Math.floor(Math.random() * Math.floor(50))}.jpg`,
+              // avatarURL: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',
+              isEditing: false,
+            }
+
+          ],
+          pendingGuest: ''
+        })
+      );
+    } else {
+      alert("Please enter a name");
+    }
+
   }
   getTotalInvited = () => this.state.guests.length;
   // Get Attending Guest
@@ -131,7 +131,7 @@ class App extends Component {
           <form onSubmit={this.newGuestSubmitHandler}>
               <input
                 type="text"
-                value="Safia"
+                value=""
                 onChange={this.handleNameInput}
                 value={this.state.pendingGuest}
                 placeholder="Invite Someone"/>
@@ -139,7 +139,10 @@ class App extends Component {
                 type="submit"
                 name="submit"
                 value="submit"
-                onSubmit={""}>Submit</button>
+                className="btn btn-primary"
+                disabled={this.state.pendingGuest.trim().length < 1}
+
+                >Invite</button>
           </form>
         </header>
         <div className="main">
@@ -172,6 +175,7 @@ class App extends Component {
           <div className="row">
             <GuestList
               guests={this.state.guests}
+              totalGuestNumber={this.state.guests.length}
               toggleConfirmationAt={this.toggleConfirmationAt}
               toggleEditingAt={this.toggleEditingAt}
               isFiltered={this.state.isFiltered}
