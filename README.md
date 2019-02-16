@@ -3,8 +3,7 @@
 
 # Current Progress:
 - Adding a component
-https://teamtreehouse.com/library/building-the-guestlist-component
-
+https://teamtreehouse.com/library/react-by-example/building-the-application/building-the-application-review
 
 ## To Do:
 - Look up What is a "handler" ?
