@@ -4,6 +4,7 @@ import  GuestList from './GuestList';
 
 class App extends Component {
   state = {
+    isFiltered: false,
     guests: [
       {
         name: 'Sarah',
@@ -85,7 +86,8 @@ class App extends Component {
     });
 
 
-  // Total guests
+  toggleFilter = () =>
+    this.setState({isFiltered: !this.state.isFiltered});
   getTotalInvited = () => this.state.guests.length;
   // Get Attending Guest
 
@@ -100,29 +102,33 @@ class App extends Component {
           <p>A Treehouse App</p>
           <form>
               <input type="text" value="Safia" placeholder="Invite Someone"/>
-              <button type="submit" name="submit" value="submit">Submit</button>
+              <button type="submit" name="submit" value="submit" onSubmit={""}>Submit</button>
           </form>
         </header>
         <div className="main">
           <div>
             <h2>Invitees</h2>
             <label>
-              <input type="checkbox" /> Hide those who havent responded
+              <input
+                type="checkbox"
+                onChange={this.toggleFilter}
+                check={this.state.isFiltered}
+                /> Hide those who havent responded
             </label>
           </div>
           <table className="counter">
             <tbody>
               <tr>
                 <td>Attending:</td>
-                <td>2</td>
+                <td>{this.state.guests.filter(guest => guest.isConfirmed).length}</td>
               </tr>
               <tr>
                 <td>Unconfirmed:</td>
-                <td>1</td>
+                <td>{this.state.guests.filter(guest => !guest.isConfirmed).length}</td>
               </tr>
               <tr>
                 <td>Total:</td>
-                <td>3</td>
+                <td>{this.state.guests.length}</td>
               </tr>
             </tbody>
           </table>
@@ -131,6 +137,7 @@ class App extends Component {
               guests={this.state.guests}
               toggleConfirmationAt={this.toggleConfirmationAt}
               toggleEditingAt={this.toggleEditingAt}
+              isFiltered={this.state.isFiltered}
               setNameAt={this.setNameAt}
               />
           </div>
