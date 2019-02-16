@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 const GuestName = props => {
     if (props.isEditing){
       return (
-        <input type="text" className="form-control" value={props.children}/>
+        <input
+          type="text"
+          className="form-control"
+          value={props.children}
+          onChange={props.handChangeEdits}
+        />
       );
     }
 
@@ -15,6 +20,7 @@ const GuestName = props => {
 
 GuestName.proptypes = {
   isEditing: PropTypes.bool.isRequired,
+  handChangeEdits: PropTypes.func.isRequired
 };
 
 export default GuestName;

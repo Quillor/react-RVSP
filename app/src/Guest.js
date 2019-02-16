@@ -11,7 +11,9 @@ const Guest = props =>
         </div>
         <div className="col-8">
           <GuestName
-            isEditing={props.isEditing}>
+            isEditing={props.isEditing}
+            handChangeEdits={e => props.setName(e.target.value)}
+            >
             {props.name}
           </GuestName>
           <div className="my-3">
@@ -22,7 +24,12 @@ const Guest = props =>
               /> Confirmed
           </div>
           <div className="d-flex flew-row w-100 justify-content-between">
-            <button onClick={props.handleToggleEditing} className='btn btn-sm btn-primary'>edit</button>
+            <button
+              onClick={props.handleToggleEditing}
+              className={props.isEditing ? 'btn btn-sm btn-success' : 'btn btn-sm btn-primary'}>
+
+               {props.isEditing ? 'save' : 'edit'}
+            </button>
             <button className='btn btn-sm btn-outline-danger'>remove</button>
           </div>
         </div>
@@ -39,7 +46,8 @@ Guest.proptypes = {
   isEditing: PropTypes.bool.isRequired,
   avatarURL: PropTypes.string.isRequired,
   handleConfirmation: PropTypes.func.isRequired,
-  handleToggleEditing: PropTypes.func.isRequired
+  handleToggleEditing: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired
 };
 
 export default Guest;
